@@ -1,0 +1,45 @@
+﻿@using SouthSideComics.Core.Models
+@using SouthSideComics.Core.Common
+@model PagedList<Item>
+
+<div class="row item-list">
+    <nav class="col-sm-12">
+        <ul class="pagination">
+            <li class="@(Model.IsFirstPage ? "disabled" : "")">
+                <a href="@(Model.PageNumber - 1)" aria-label="Previous">
+                    <span aria-hidden="true">Previous</span>
+                </a>
+            </li>
+            <li class="@(Model.IsLastPage ? "disabled" : "")">
+                <a href="/?page=@(Model.PageNumber + 1)" aria-label="Next">
+                    <span aria-hidden="true">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>    
+
+
+    @foreach (var item in Model)
+    {
+    <div class="col-sm-3 item">
+        <img class="img-responsive" src="~/img/item/hi-res/@(item.StockNumber).jpg" />
+        <p>@item.FullTitle</p>
+        <p>@item.Publisher</p>
+    </div>
+    }
+        
+    <nav class="col-sm-12">
+        <ul class="pagination">            
+            <li class="@(Model.IsFirstPage ? "disabled" : "")">
+                <a href="@(Model.PageNumber - 1)" aria-label="Previous">
+                    <span aria-hidden="true">Previous</span>
+                </a>
+            </li>            
+            <li class="@(Model.IsLastPage ? "disabled" : "")">
+                <a href="/?page=@(Model.PageNumber + 1)" aria-label="Next">
+                    <span aria-hidden="true">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>    
+</div>
