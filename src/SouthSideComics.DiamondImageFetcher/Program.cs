@@ -6,6 +6,9 @@ using System.Threading;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
 using SouthSideComics.Core.Mappers;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Framework.OptionsModel;
 
 namespace SouthSideComics.DiamondImageFetcher
 {
@@ -13,20 +16,22 @@ namespace SouthSideComics.DiamondImageFetcher
     {
         CookieContainer Cookies { get; set; }
         IConfiguration Configuration { get; set; }
+        List<string> StockNumbers { get; set; }
 
         public async void Main(string[] args)
-        {
+        {                        
             IServiceCollection services = new ServiceCollection();
 
             Configuration = new Configuration()
                 .AddJsonFile("config.json")
                 .AddEnvironmentVariables()
                 .AddUserSecrets();
-
+            
             services.Configure<ConnectionConfig>(p =>
-            {
+            {                
                 p.ConnectionString = Configuration.Get("Data:DefaultConnection:ConnectionString");
             });
+            services.AddOptions();          
             services.AddTransient<ItemMapper>();
 
             // cookie container is used to manage the cookies that happen
@@ -36,13 +41,24 @@ namespace SouthSideComics.DiamondImageFetcher
             Authenticate();
 
             // load stock numbers
-            var serviceProvider = services.BuildServiceProvider();
-            var itemMapper = serviceProvider.GetService<ItemMapper>();
-            var items = await itemMapper.FindAllAsync();
+            var serviceProvider = services.BuildServiceProvider();            
+            var itemMapper = serviceProvider.GetRequiredService<ItemMapper>();
 
-            foreach(var item in items)
+            if (args.Length > 0)
+            {
+                StockNumbers = args[0].Split(',').ToList();
+                StockNumbers.ForEach(p => p.Trim());
+            }
+            else
+            {
+                var items = await itemMapper.FindAllAsync();
+                StockNumbers = items.Select(p => p.StockNumber).ToList();
+            }
+            
+
+            foreach(var stockNumber in StockNumbers)
             {                
-                Fetch(item.StockNumber);
+                Fetch(stockNumber);
                 Thread.Sleep(1000);
             }
                                    

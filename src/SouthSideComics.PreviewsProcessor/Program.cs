@@ -26,6 +26,7 @@ namespace SouthSideComics.PreviewsProcessor
             {
                 p.ConnectionString = configuration.Get("Data:DefaultConnection:ConnectionString");
             });
+            services.AddOptions();
             services.AddTransient<ItemMapper>();
 
             var filePath = args[0];            

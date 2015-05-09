@@ -199,3 +199,5 @@ FakesAssemblies/
 # wwwroot output files
 **/wwwroot/lib/
 **/wwwroot/img/
+src/SouthSideComics.Web/wwwroot/lib
+src/SouthSideComics.Web/wwwroot/img
