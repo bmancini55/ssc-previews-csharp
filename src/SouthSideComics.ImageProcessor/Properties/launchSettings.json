@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SouthSideComics.ImageProcessor": {
+      "commandName": "SouthSideComics.ImageProcessor",
+      "commandLineArgs": "\"D:\\Covers\\201505\" \"D:\\CoversProcessed\""
+    }
+  }
+}

@@ -1,21 +1,21 @@
 {
-    "userSecretsId": "aspnet5-SouthSideComics.DiamondImageFetcher-20150506104606",
-    "version": "1.0.0-*",
-    "description": "",
-    "authors": [ "" ],
-    "tags": [ "" ],
-    "projectUrl": "",
-    "licenseUrl": "",
+  "userSecretsId": "aspnet5-SouthSideComics.DiamondImageFetcher-20150506104606",
+  "version": "1.0.0-*",
+  "description": "",
+  "authors": [ "" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
 
-    "dependencies": {        
-        "Microsoft.Framework.ConfigurationModel.Interfaces": "1.0.0-beta4",
-        "Microsoft.Framework.DependencyInjection.Interfaces": "1.0.0-beta4",
-        "Microsoft.Framework.ConfigurationModel": "1.0.0-beta4",
-        "Microsoft.Framework.DependencyInjection": "1.0.0-beta4",
-        "Microsoft.Framework.ConfigurationModel.Json": "1.0.0-beta4",
-        "SecretManager": "1.0.0-beta4",
-        "SouthSideComics.Core": "1.0.0-*"
-    },
+  "dependencies": {
+    "Microsoft.Framework.ConfigurationModel": "1.0.0-beta4",
+    "Microsoft.Framework.ConfigurationModel.Interfaces": "1.0.0-beta4",
+    "Microsoft.Framework.ConfigurationModel.Json": "1.0.0-beta4",
+    "Microsoft.Framework.DependencyInjection": "1.0.0-beta4",
+    "Microsoft.Framework.DependencyInjection.Interfaces": "1.0.0-beta4",        
+    "SecretManager": "1.0.0-beta4",
+    "SouthSideComics.Core": "1.0.0-*"
+  },
 
     "commands": {
         "SouthSideComics.DiamondImageFetcher": "SouthSideComics.DiamondImageFetcher"
