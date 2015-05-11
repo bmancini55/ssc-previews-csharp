@@ -32,7 +32,7 @@ namespace SouthSideComics.DiamondImageFetcher
                 p.ConnectionString = Configuration.Get("Data:DefaultConnection:ConnectionString");
             });
             services.AddOptions();          
-            services.AddTransient<ItemMapper>();
+            services.AddTransient<PreviewsItemMapper>();
 
             // cookie container is used to manage the cookies that happen
             Cookies = new CookieContainer();
@@ -42,7 +42,7 @@ namespace SouthSideComics.DiamondImageFetcher
 
             // load stock numbers
             var serviceProvider = services.BuildServiceProvider();            
-            var itemMapper = serviceProvider.GetRequiredService<ItemMapper>();
+            var itemMapper = serviceProvider.GetRequiredService<PreviewsItemMapper>();
 
             if (args.Length > 0)
             {

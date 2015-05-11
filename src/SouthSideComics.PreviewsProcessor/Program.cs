@@ -27,7 +27,7 @@ namespace SouthSideComics.PreviewsProcessor
                 p.ConnectionString = configuration.Get("Data:DefaultConnection:ConnectionString");
             });
             services.AddOptions();
-            services.AddTransient<ItemMapper>();
+            services.AddTransient<PreviewsItemMapper>();
 
             var filePath = args[0];            
             if (!File.Exists(filePath))
@@ -51,7 +51,7 @@ namespace SouthSideComics.PreviewsProcessor
 
                 // write each record to the database
                 var serviceProvider = services.BuildServiceProvider();                                                
-                var itemMapper = serviceProvider.GetService<ItemMapper>();
+                var itemMapper = serviceProvider.GetService<PreviewsItemMapper>();
 
                 foreach (var csvItem in csvItems)
                 {    

@@ -32,8 +32,9 @@ namespace SouthSideComicsWeb
                 p.ConnectionString = Configuration.Get("Data:DefaultConnection:ConnectionString");
             });
                          
-            services.AddMvc();
-            services.AddTransient<ItemMapper>();
+            services.AddMvc();            
+            services.AddTransient<PreviewsItemMapper>();
+            services.AddTransient<PreviewsCopyMapper>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SouthSideComics.Core.Mappers
 {
-    public class ItemMapper : MySqlMapper
+    public class PreviewsItemMapper : MySqlMapper
     {
-        public ItemMapper(IOptions<ConnectionConfig> config)
+        public PreviewsItemMapper(IOptions<ConnectionConfig> config)
             : base(config)
         { }
 
@@ -75,7 +75,7 @@ namespace SouthSideComics.Core.Mappers
         {
             string cmdText = @"
                 select *
-                from preivewsitem
+                from previewsitem
                 order by itemid;";
 
             return await ExecuteReaderListAsync(cmdText, CommandType.Text, null, Parse);
@@ -85,7 +85,7 @@ namespace SouthSideComics.Core.Mappers
         {
             string cmdText = @"
                 select *
-                from preivewsitem
+                from previewsitem
                 where stocknumber = @stocknumber;";
 
             var parameters = new MySqlParameter[]
@@ -100,7 +100,7 @@ namespace SouthSideComics.Core.Mappers
         {
             string cmdText = @"
                 select *
-                from preivewsitem
+                from previewsitem
                 where diamondnumber = @diamondnumber;";
 
             var parameters = new MySqlParameter[]
@@ -115,7 +115,7 @@ namespace SouthSideComics.Core.Mappers
         {
             string cmdText = @"
                 select *
-                from preivewsitem
+                from previewsitem
                 where upcnumber = @upcnumber;";
 
             var parameters = new MySqlParameter[]
@@ -129,7 +129,7 @@ namespace SouthSideComics.Core.Mappers
         public async Task<int> SaveAsync(PreviewsItem instance)
         {
             string cmdText = @"
-                insert into preivewsitem (
+                insert into previewsitem (
                     itemid, adult, artist, alliancesku, bounceuseitem, boxpercase, brandcode, cardperpack, category, 
                     caution1, caution2, caution3, coverartist, diamondnumber, discountcode, eannumber, focdate, focvendor, 
                     fulltitle, genre, increment, issuenumber, issuesequencenumber, maindescription, mature, maxissue, noteprice, 
@@ -209,7 +209,7 @@ namespace SouthSideComics.Core.Mappers
         public async void DeleteAsync(int itemid)
         {
             string cmdText = @"
-                delete from preivewsitem
+                delete from previewsitem
                 where itemid = @itemid;";
 
             var parameters = new MySqlParameter[]
