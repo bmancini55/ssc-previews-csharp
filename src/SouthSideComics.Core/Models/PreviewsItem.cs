@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SouthSideComics.Core.Models
 {
-    public class Item
+    public class PreviewsItem
     {
         /// <summary>
         /// Surrogate key

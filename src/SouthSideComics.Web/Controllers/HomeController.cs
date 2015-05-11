@@ -23,7 +23,7 @@ namespace SouthSideComicsWeb.Web.Controllers
         {
             var start = (page - 1) * pagesize;
             var model = await ItemMapper.FindAllAsync();
-            model = new PagedList<Item>(model.Skip(start).Take(pagesize), page, pagesize, model.TotalCount);
+            model = new PagedList<PreviewsItem>(model.Skip(start).Take(pagesize), page, pagesize, model.TotalCount);
             
             return View(model);
         }

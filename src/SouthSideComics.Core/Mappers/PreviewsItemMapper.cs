@@ -14,12 +14,12 @@ namespace SouthSideComics.Core.Mappers
             : base(config)
         { }
 
-        public Item Parse(MySqlDataReader reader)
+        public PreviewsItem Parse(MySqlDataReader reader)
         {            
-            Item result = null;
+            PreviewsItem result = null;
             if(reader.HasRows)
             {
-                result = new Item()
+                result = new PreviewsItem()
                 {
                     ItemId = reader.GetInt32("itemid"),
                     Adult = reader.GetString("adult"),
@@ -71,7 +71,7 @@ namespace SouthSideComics.Core.Mappers
             return result;
         }
 
-        public async Task<PagedList<Item>> FindAllAsync()
+        public async Task<PagedList<PreviewsItem>> FindAllAsync()
         {
             string cmdText = @"
                 select *
@@ -81,7 +81,7 @@ namespace SouthSideComics.Core.Mappers
             return await ExecuteReaderListAsync(cmdText, CommandType.Text, null, Parse);
         }
 
-        public async Task<Item> FindByStockNumberAsync(string stockNumber)
+        public async Task<PreviewsItem> FindByStockNumberAsync(string stockNumber)
         {
             string cmdText = @"
                 select *
@@ -96,7 +96,7 @@ namespace SouthSideComics.Core.Mappers
             return await ExecuteReaderAsync(cmdText, CommandType.Text, parameters, Parse);
         }
 
-        public async Task<Item> FindByDiamondNumberAsync(string diamondNumber)
+        public async Task<PreviewsItem> FindByDiamondNumberAsync(string diamondNumber)
         {
             string cmdText = @"
                 select *
@@ -111,7 +111,7 @@ namespace SouthSideComics.Core.Mappers
             return await ExecuteReaderAsync(cmdText, CommandType.Text, parameters, Parse);
         }
 
-        public async Task<Item> FindByUPCAsync(string upc)
+        public async Task<PreviewsItem> FindByUPCAsync(string upc)
         {
             string cmdText = @"
                 select *
@@ -126,7 +126,7 @@ namespace SouthSideComics.Core.Mappers
             return await ExecuteReaderAsync(cmdText, CommandType.Text, parameters, Parse);
         }
 
-        public async Task<int> SaveAsync(Item instance)
+        public async Task<int> SaveAsync(PreviewsItem instance)
         {
             string cmdText = @"
                 insert into preivewsitem (

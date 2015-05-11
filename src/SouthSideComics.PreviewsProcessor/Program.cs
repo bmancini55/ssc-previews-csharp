@@ -56,7 +56,7 @@ namespace SouthSideComics.PreviewsProcessor
                 foreach (var csvItem in csvItems)
                 {    
                     Console.WriteLine(string.Format("{0} - {1}", csvItem.DIAMD_NO, csvItem.FULL_TITLE));                
-                    var item = new Item()
+                    var item = new Core.Models.PreviewsItem()
                     {
                         DiamondNumber = csvItem.DIAMD_NO,
                         StockNumber = csvItem.STOCK_NO,
