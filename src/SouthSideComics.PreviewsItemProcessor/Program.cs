@@ -7,7 +7,7 @@ using Microsoft.Framework.ConfigurationModel;
 using SouthSideComics.Core.Mappers;
 using SouthSideComics.Core.Models;
 
-namespace SouthSideComics.PreviewsProcessor
+namespace SouthSideComics.PreviewsItemProcessor
 {
     public class Program
     {
@@ -20,7 +20,10 @@ namespace SouthSideComics.PreviewsProcessor
                 return;
             }
 
-            IConfiguration configuration = new Configuration().AddJsonFile("config.json");
+            IConfiguration configuration = new Configuration()
+                .AddJsonFile("config.json")
+                .AddUserSecrets();
+
             IServiceCollection services = new ServiceCollection();
             services.Configure<ConnectionConfig>(p =>
             {
@@ -37,8 +40,7 @@ namespace SouthSideComics.PreviewsProcessor
             }
 
             var csvConfig = new CsvConfiguration();
-            csvConfig.Delimiter = "\t";
-            csvConfig.QuoteNoFields = true;
+            csvConfig.Delimiter = "\t";            
             
             using (var stream = new StreamReader(filePath))
             using (var csv = new CsvReader(stream, csvConfig)) 
@@ -109,11 +111,6 @@ namespace SouthSideComics.PreviewsProcessor
             }
 
             Console.ReadKey();
-        }
-        
-        async int Process<T>()
-        {
-
-        }            
+        }               
     }
 }

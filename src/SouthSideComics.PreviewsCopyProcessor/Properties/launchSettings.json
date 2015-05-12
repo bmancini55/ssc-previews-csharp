@@ -1,0 +1,8 @@
+{
+  "profiles": {    
+    "SouthSideComics.PreviewsCopyProcessor": {
+      "commandName": "SouthSideComics.PreviewsCopyProcessor",
+      "commandLineArgs": "D:\\Users\\bmancini\\Downloads\\previewsDB.txt"
+    }
+  }
+}

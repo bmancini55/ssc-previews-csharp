@@ -1,5 +1,5 @@
 {
-    "userSecretsId": "aspnet5-SouthSideComics.PreviewsItemProcessor-20150503024648",
+    "userSecretsId": "aspnet5-SouthSideComics.PreviewsCopyProcessor-20150503024648",
     "version": "1.0.0-*",
     "description": "",
     "authors": [ "" ],
@@ -19,7 +19,7 @@
     },
 
     "commands": {
-        "SouthSideComics.PreviewsItemProcessor": "SouthSideComics.PreviewsItemProcessor"
+        "SouthSideComics.PreviewsCopyProcessor": "SouthSideComics.PreviewsCopyProcessor"
     },
 
     "frameworks": {

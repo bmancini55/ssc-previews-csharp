@@ -61,7 +61,7 @@ namespace SouthSideComics.Core.Mappers
                 new MySqlParameter("@copyid", instance.CopyId),
                 new MySqlParameter("@stocknumber", instance.StockNumber),
                 new MySqlParameter("@title", instance.Title),
-                new MySqlParameter("@price", instance.Preview),
+                new MySqlParameter("@price", instance.Price),
                 new MySqlParameter("@preview", instance.Preview),
                 new MySqlParameter("@description", instance.Description)
             };

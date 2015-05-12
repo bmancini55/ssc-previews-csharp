@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SouthSideComics.PreviewsItemProcessor": {
+      "commandName": "SouthSideComics.PreviewsItemProcessor",
+      "commandLineArgs": "D:\\Users\\bmancini\\Downloads\\MasterDataFile-ITEMS.txt"
+    }
+  }
+}

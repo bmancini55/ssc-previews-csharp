@@ -6,13 +6,13 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>224060a9-e295-4be1-9ddc-6e00c2bbcb1b</ProjectGuid>
-    <RootNamespace>SouthSideComics.PreviewsItemProcessor</RootNamespace>
+    <ProjectGuid>6381683f-da4b-44b9-8e65-efa58abf8401</ProjectGuid>
+    <RootNamespace>SouthSideComics.PreviewsCopyProcessor</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">..\..\artifacts\bin\$(MSBuildProjectName)\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AssemblyName>SouthSideComics.PreviewsItemProcessor</AssemblyName>
+    <AssemblyName>SouthSideComics.PreviewsCopyProcessor</AssemblyName>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
