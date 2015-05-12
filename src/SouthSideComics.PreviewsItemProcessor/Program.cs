@@ -109,6 +109,11 @@ namespace SouthSideComics.PreviewsProcessor
             }
 
             Console.ReadKey();
-        }              
+        }
+        
+        async int Process<T>()
+        {
+
+        }            
     }
 }
