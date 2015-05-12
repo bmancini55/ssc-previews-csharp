@@ -28,7 +28,7 @@ namespace SouthSideComicsWeb.Web.Controllers
             var items = await ItemMapper.FindAllAsync();
             items = new PagedList<PreviewsItem>(items.Skip(start).Take(pagesize), page, pagesize, items.TotalCount);
         
-            var tasks = items.Select(p => CopyMapper.FindByStockNumberAsync(p.StockNumber));
+            var tasks = items.Select(p => CopyMapper.FindByStockNumberAsync(p.DiamondNumber));
             var copy = await Task.WhenAll(tasks);
             var copyJoin = copy.ToDictionary(p => p.StockNumber);
 
