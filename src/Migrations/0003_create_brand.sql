@@ -1,9 +1,11 @@
 drop table if exists brand;
 create table brand (
-  brandid int primary key auto_increment,
+  brandid int auto_increment,
   brandcode nvarchar(2) not null,
   brandname nvarchar(255) not null
+  primary key (brandid)
 ) engine = innodb;
+
 
 insert into brand (brandcode, brandname) values ('AL', 'Aliens');
 insert into brand (brandcode, brandname) values ('AM', 'Aftermath');

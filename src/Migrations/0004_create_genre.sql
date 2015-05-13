@@ -1,8 +1,9 @@
 drop table if exists genre;
 create table genre (
-  genreid int primary key auto_increment,
+  genreid int auto_increment,
   genrecode nvarchar(2) not null,
   genrename nvarchar(255) not null
+  primary key (genreid)
 ) engine=innodb;
 
 insert into genre (genrecode, genrename) values ('AA', 'Action / Adventure');

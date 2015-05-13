@@ -1,9 +1,10 @@
 drop table if exists category;
 create table category (
-  categoryid int primary key,
+  categoryid int(11) not null
   categoryname nvarchar(255) not null,
-  consumer tinyint default 1
-) engine=innodb;
+  consumer tinyint(4) null default 1,
+  primary key (categoryid)
+) engine = innodb;
 
 insert into category (categoryid, categoryname, consumer) values(1, 'Comics', 1);
 insert into category (categoryid, categoryname, consumer) values(2, 'Magazines', 1);
