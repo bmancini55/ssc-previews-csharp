@@ -5,13 +5,14 @@ using System.IO;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.ConfigurationModel;
 using SouthSideComics.Core.Common;
-using SouthSideComics.Core.MySql;
+using SouthSideComics.Core.Mongo;
+using System.Threading.Tasks;
 
 namespace SouthSideComics.PreviewsItemProcessor
 {
     public class Program
     {
-        public async void Main(string[] args)
+        public async Task Main(string[] args)
         {            
             // validate file path exists
             if (args.Length != 1)
@@ -25,10 +26,7 @@ namespace SouthSideComics.PreviewsItemProcessor
                 .AddUserSecrets();
 
             IServiceCollection services = new ServiceCollection();
-            services.Configure<Config>(p =>
-            {
-                p.MySqlConnectionString = configuration.Get("Data:DefaultConnection:ConnectionString");
-            });
+            services.Configure<Config>(configuration.GetSubKey("Data:Config"));
             services.AddOptions();
             services.AddTransient<PreviewsItemMapper>();
 

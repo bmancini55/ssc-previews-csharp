@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Microsoft.Framework.OptionsModel;
+using MongoDB.Driver;
 using SouthSideComics.Core.Common;
 using System;
 using System.Collections.Generic;
@@ -9,10 +10,10 @@ namespace SouthSideComics.Core.Mongo
 {
     public class MongoMapper
     {
-        public MongoMapper(Config config)
+        public MongoMapper(IOptions<Config> config)
         {
-            this.ConnectionString = config.MongoConnectionString;
-            this.Database = config.MongoDatabase;
+            this.ConnectionString = config.Options.MongoConnectionString;
+            this.Database = config.Options.MongoDatabase;
         }
 
         public string ConnectionString { get; set; }
@@ -23,7 +24,7 @@ namespace SouthSideComics.Core.Mongo
         {
             var client = new MongoClient(ConnectionString);
             var db = client.GetDatabase(Database);
-            return db.GetCollection<T>("previewsitem");
+            return db.GetCollection<T>(collectionName, new MongoCollectionSettings() { AssignIdOnInsert = true });
         }
     }
 }
