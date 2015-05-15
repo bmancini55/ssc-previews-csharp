@@ -1,4 +1,5 @@
 ﻿using Microsoft.Framework.OptionsModel;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using SouthSideComics.Core.Common;
 using SouthSideComics.Core.Models;
@@ -24,7 +25,14 @@ namespace SouthSideComics.Core.Mongo
         public async Task<PagedList<PreviewsItem>> FindAllAsync()
         {
             var colelction = GetCollection<PreviewsItem>("PreviewsItem");
-            var results = await colelction.Find(p => p != null).ToListAsync();
+
+            // Find all by applying blank filter
+            var filter = new BsonDocument();                        
+            var results = await colelction
+                .Find(filter)
+                .SortBy(p => p.DiamondNumber)
+                .ToListAsync();
+
             return new PagedList<PreviewsItem>(results);
         }
     }

@@ -5,6 +5,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Logging;
 using Microsoft.AspNet.Diagnostics;
 using SouthSideComics.Core.MySql;
+using SouthSideComics.Core.Mongo;
 using SouthSideComics.Core.Common;
 
 namespace SouthSideComicsWeb
@@ -27,15 +28,12 @@ namespace SouthSideComicsWeb
 
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
-        {            
-            services.Configure<Config>(p =>
-            {
-                p.MySqlConnectionString = Configuration.Get("Data:DefaultConnection:ConnectionString");
-            });
-                         
+        {
+            services.Configure<Config>(Configuration.GetSubKey("Data:Config"));                         
             services.AddMvc();            
-            services.AddTransient<PreviewsItemMapper>();
-            services.AddTransient<PreviewsCopyMapper>();
+            services.AddTransient<SouthSideComics.Core.MySql.PreviewsItemMapper>();
+            services.AddTransient<SouthSideComics.Core.MySql.PreviewsCopyMapper>();
+            services.AddTransient<SouthSideComics.Core.Mongo.PreviewsItemMapper>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
