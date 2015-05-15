@@ -4,7 +4,8 @@ using Microsoft.Framework.ConfigurationModel;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Logging;
 using Microsoft.AspNet.Diagnostics;
-using SouthSideComics.Core.Mappers;
+using SouthSideComics.Core.MySql;
+using SouthSideComics.Core.Common;
 
 namespace SouthSideComicsWeb
 {
@@ -27,9 +28,9 @@ namespace SouthSideComicsWeb
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {            
-            services.Configure<ConnectionConfig>(p =>
+            services.Configure<Config>(p =>
             {
-                p.ConnectionString = Configuration.Get("Data:DefaultConnection:ConnectionString");
+                p.MySqlConnectionString = Configuration.Get("Data:DefaultConnection:ConnectionString");
             });
                          
             services.AddMvc();            

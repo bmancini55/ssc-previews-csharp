@@ -1,17 +1,15 @@
 ﻿using Microsoft.Framework.OptionsModel;
 using MySql.Data.MySqlClient;
+using SouthSideComics.Core.Common;
 using SouthSideComics.Core.Models;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace SouthSideComics.Core.Mappers
+namespace SouthSideComics.Core.MySql
 {
     public class PreviewsCopyMapper : MySqlMapper
     {
-        public PreviewsCopyMapper(IOptions<ConnectionConfig> config)
+        public PreviewsCopyMapper(IOptions<Config> config)
             : base(config)
         { }
 

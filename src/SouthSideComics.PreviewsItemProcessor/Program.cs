@@ -4,8 +4,8 @@ using System;
 using System.IO;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.ConfigurationModel;
-using SouthSideComics.Core.Mappers;
-using SouthSideComics.Core.Models;
+using SouthSideComics.Core.Common;
+using SouthSideComics.Core.MySql;
 
 namespace SouthSideComics.PreviewsItemProcessor
 {
@@ -25,9 +25,9 @@ namespace SouthSideComics.PreviewsItemProcessor
                 .AddUserSecrets();
 
             IServiceCollection services = new ServiceCollection();
-            services.Configure<ConnectionConfig>(p =>
+            services.Configure<Config>(p =>
             {
-                p.ConnectionString = configuration.Get("Data:DefaultConnection:ConnectionString");
+                p.MySqlConnectionString = configuration.Get("Data:DefaultConnection:ConnectionString");
             });
             services.AddOptions();
             services.AddTransient<PreviewsItemMapper>();

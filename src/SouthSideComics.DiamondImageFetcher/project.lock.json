@@ -362,6 +362,82 @@
         "lib/dnxcore50/Microsoft.Framework.Runtime.Interfaces.xml"
       ]
     },
+    "MongoDB.Bson/2.0.0": {
+      "serviceable": false,
+      "sha": "oij2O4yegOKc6zZByxhbuILQIqT0xbUv9DHAt7HdQTzvlOJ7WgKwsMsoQR6VO4qd8PntGvcC9o/sNAj3KdndKA==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net45/MongoDB.Bson.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/MongoDB.Bson.dll"
+          ]
+        }
+      },
+      "files": [
+        "License.rtf",
+        "MongoDB.Bson.2.0.0.nupkg",
+        "MongoDB.Bson.2.0.0.nupkg.sha512",
+        "MongoDB.Bson.nuspec",
+        "lib/net45/MongoDB.Bson.dll",
+        "lib/net45/MongoDB.Bson.XML"
+      ]
+    },
+    "MongoDB.Driver/2.0.0": {
+      "serviceable": false,
+      "sha": "MloX+kZsJsrDqtCRZShRRwcVbSUdj7II98gl7aXcXfCKXEFMWn3931o39YTMv6nwN/Z0MxkVJ0r68Vr1nO3pbw==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {
+            "MongoDB.Bson": "2.0.0",
+            "MongoDB.Driver.Core": "2.0.0"
+          },
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net45/MongoDB.Driver.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/MongoDB.Driver.dll"
+          ]
+        }
+      },
+      "files": [
+        "License.rtf",
+        "MongoDB.Driver.2.0.0.nupkg",
+        "MongoDB.Driver.2.0.0.nupkg.sha512",
+        "MongoDB.Driver.nuspec",
+        "lib/net45/MongoDB.Driver.dll",
+        "lib/net45/MongoDB.Driver.XML"
+      ]
+    },
+    "MongoDB.Driver.Core/2.0.0": {
+      "serviceable": false,
+      "sha": "mMU89OUiwuSsDW7A2vYEt2VNOpbrD0IR0dtnGyGlIj8IENjIDZG9uXRkIMipW9fl8XBRl8eKWss4AQvTPXtaKg==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {
+            "MongoDB.Bson": "2.0.0"
+          },
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net45/MongoDB.Driver.Core.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/MongoDB.Driver.Core.dll"
+          ]
+        }
+      },
+      "files": [
+        "License.rtf",
+        "MongoDB.Driver.Core.2.0.0.nupkg",
+        "MongoDB.Driver.Core.2.0.0.nupkg.sha512",
+        "MongoDB.Driver.Core.nuspec",
+        "lib/net45/MongoDB.Driver.Core.dll"
+      ]
+    },
     "MySql.Data/6.9.6": {
       "serviceable": false,
       "sha": "o6tQW+M2gCOKjf6OpZixObc+eHZgriHowXRAEZYDKWWf9NtLuqAkCJpSnBSyBbgLEYmGCRILOXtNQg2hSQSUJg==",

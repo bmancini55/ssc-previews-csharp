@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,11 +7,17 @@ using System.Threading.Tasks;
 namespace SouthSideComics.Core.Models
 {
     public class PreviewsItem
-    {
+    {        
         /// <summary>
-        /// Surrogate key
+        /// Required for MySQL
         /// </summary>
         public int ItemId { get; set; }
+
+        /// <summary>
+        /// Required for MongoDB
+        /// </summary>
+        public ObjectId Id { get; set; }
+
         public string DiamondNumber { get; set; }
         public string StockNumber { get; set; }
         public string ParentItem { get; set; }
@@ -55,5 +62,7 @@ namespace SouthSideComics.Core.Models
         public string CoverArtist { get; set; }
         public string AllianceSKU { get; set; }
         public string FOCDate { get; set; }
+
+        public PreviewsCopy Copy { get; set; }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNet.Mvc;
-using SouthSideComics.Core.Mappers;
 using SouthSideComics.Core.Models;
 using System.Threading.Tasks;
 using SouthSideComics.Core.Common;
 using SouthSideComics.Web.Models;
+using SouthSideComics.Core.MySql;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 

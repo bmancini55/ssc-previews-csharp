@@ -6,7 +6,7 @@ using System.Data;
 using Microsoft.Framework.OptionsModel;
 using SouthSideComics.Core.Common;
 
-namespace SouthSideComics.Core.Mappers
+namespace SouthSideComics.Core.MySql
 {
 
     public abstract class MySqlMapper
@@ -19,9 +19,9 @@ namespace SouthSideComics.Core.Mappers
         /// <summary>
         /// Creates a MySqlMapper using the default connection string from the application settings
         /// </summary>
-        public MySqlMapper(IOptions<ConnectionConfig> config)
+        public MySqlMapper(IOptions<Config> config)
         {
-            this.ConnectionString = config.Options.ConnectionString;
+            this.ConnectionString = config.Options.MySqlConnectionString;
         }
 
         #endregion

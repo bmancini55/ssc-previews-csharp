@@ -7,6 +7,9 @@ namespace SouthSideComics.Core.Models
 {
     public class PreviewsCopy
     {
+        /// <summary>
+        /// This is needed for MySQL
+        /// </summary>
         public int CopyId { get; set; }
         public string StockNumber { get; set; }
         public string Title { get; set; }

@@ -1,16 +1,15 @@
 ﻿using Microsoft.Framework.OptionsModel;
 using MySql.Data.MySqlClient;
 using SouthSideComics.Core.Common;
-using SouthSideComics.Core.Mappers;
 using SouthSideComics.Core.Models;
 using System.Data;
 using System.Threading.Tasks;
 
-namespace SouthSideComics.Core.Mappers
+namespace SouthSideComics.Core.MySql
 {
     public class PreviewsItemMapper : MySqlMapper
     {
-        public PreviewsItemMapper(IOptions<ConnectionConfig> config)
+        public PreviewsItemMapper(IOptions<Config> config)
             : base(config)
         { }
 
@@ -79,52 +78,7 @@ namespace SouthSideComics.Core.Mappers
                 order by itemid;";
 
             return await ExecuteReaderListAsync(cmdText, CommandType.Text, null, Parse);
-        }
-
-        public async Task<PreviewsItem> FindByStockNumberAsync(string stockNumber)
-        {
-            string cmdText = @"
-                select *
-                from previewsitem
-                where stocknumber = @stocknumber;";
-
-            var parameters = new MySqlParameter[]
-            {
-                new MySqlParameter("@stocknumber", stockNumber)
-            };
-
-            return await ExecuteReaderAsync(cmdText, CommandType.Text, parameters, Parse);
-        }
-
-        public async Task<PreviewsItem> FindByDiamondNumberAsync(string diamondNumber)
-        {
-            string cmdText = @"
-                select *
-                from previewsitem
-                where diamondnumber = @diamondnumber;";
-
-            var parameters = new MySqlParameter[]
-            {
-                new MySqlParameter("@diamondnumber", diamondNumber)
-            };
-
-            return await ExecuteReaderAsync(cmdText, CommandType.Text, parameters, Parse);
-        }
-
-        public async Task<PreviewsItem> FindByUPCAsync(string upc)
-        {
-            string cmdText = @"
-                select *
-                from previewsitem
-                where upcnumber = @upcnumber;";
-
-            var parameters = new MySqlParameter[]
-            {
-                new MySqlParameter("@upcnumber", upc)
-            };
-
-            return await ExecuteReaderAsync(cmdText, CommandType.Text, parameters, Parse);
-        }
+        }        
 
         public async Task<int> SaveAsync(PreviewsItem instance)
         {

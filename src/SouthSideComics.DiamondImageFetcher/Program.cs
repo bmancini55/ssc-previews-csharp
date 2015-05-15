@@ -27,9 +27,9 @@ namespace SouthSideComics.DiamondImageFetcher
                 .AddEnvironmentVariables()
                 .AddUserSecrets();
             
-            services.Configure<ConnectionConfig>(p =>
+            services.Configure<Config>(p =>
             {                
-                p.ConnectionString = Configuration.Get("Data:DefaultConnection:ConnectionString");
+                p.MySqlConnectionString = Configuration.Get("Data:DefaultConnection:ConnectionString");
             });
             services.AddOptions();          
             services.AddTransient<PreviewsItemMapper>();
