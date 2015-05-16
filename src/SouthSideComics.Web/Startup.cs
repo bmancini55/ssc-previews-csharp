@@ -4,7 +4,6 @@ using Microsoft.Framework.ConfigurationModel;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Logging;
 using Microsoft.AspNet.Diagnostics;
-using SouthSideComics.Core.MySql;
 using SouthSideComics.Core.Mongo;
 using SouthSideComics.Core.Common;
 
@@ -30,10 +29,8 @@ namespace SouthSideComicsWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<Config>(Configuration.GetSubKey("Data:Config"));                         
-            services.AddMvc();            
-            services.AddTransient<SouthSideComics.Core.MySql.PreviewsItemMapper>();
-            services.AddTransient<SouthSideComics.Core.MySql.PreviewsCopyMapper>();
-            services.AddTransient<SouthSideComics.Core.Mongo.PreviewsItemMapper>();
+            services.AddMvc();                        
+            services.AddTransient<PreviewsItemMapper>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

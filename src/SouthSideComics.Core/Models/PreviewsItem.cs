@@ -4,16 +4,7 @@ namespace SouthSideComics.Core.Models
 {
     public class PreviewsItem
     {        
-        /// <summary>
-        /// Required for MySQL
-        /// </summary>
-        public int ItemId { get; set; }
-
-        /// <summary>
-        /// Required for MongoDB
-        /// </summary>
         public ObjectId Id { get; set; }
-
         public string DiamondNumber { get; set; }
         public string StockNumber { get; set; }
         public string ParentItem { get; set; }

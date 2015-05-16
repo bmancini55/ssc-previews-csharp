@@ -56,7 +56,7 @@ namespace SouthSideComics.PreviewsCopyProcessor
 
                 foreach (var copy in copyData)
                 {    
-                    Console.WriteLine(string.Format("{0} - {1}", copy.StockNumber, copy.Title));                                    
+                    Console.WriteLine(string.Format("{0} - {1}", copy.DiamondNumber, copy.Title));                                    
                     await copyMapper.SaveAsync(copy);                    
                 }
             }
@@ -69,7 +69,7 @@ namespace SouthSideComics.PreviewsCopyProcessor
     {
         public PreviewsCopyMap()
         {
-            Map(p => p.StockNumber).Index(0);
+            Map(p => p.DiamondNumber).Index(0);
             Map(p => p.Title).Index(1);
             Map(p => p.Price).Index(2);
             Map(p => p.Preview).Index(3);

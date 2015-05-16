@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading;
 using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.DependencyInjection;
-using SouthSideComics.Core.Mappers;
+using SouthSideComics.Core.Mongo;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Framework.OptionsModel;
+using SouthSideComics.Core.Common;
 
 namespace SouthSideComics.DiamondImageFetcher
 {
@@ -26,11 +26,8 @@ namespace SouthSideComics.DiamondImageFetcher
                 .AddJsonFile("config.json")
                 .AddEnvironmentVariables()
                 .AddUserSecrets();
-            
-            services.Configure<Config>(p =>
-            {                
-                p.MySqlConnectionString = Configuration.Get("Data:DefaultConnection:ConnectionString");
-            });
+
+            services.Configure<Config>(Configuration.GetSubKey("Data:Config"));
             services.AddOptions();          
             services.AddTransient<PreviewsItemMapper>();
 
