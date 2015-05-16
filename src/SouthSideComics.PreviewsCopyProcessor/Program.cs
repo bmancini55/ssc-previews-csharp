@@ -29,7 +29,7 @@ namespace SouthSideComics.PreviewsCopyProcessor
             IServiceCollection services = new ServiceCollection();
             services.Configure<Config>(configuration.GetSubKey("Data:Config"));            
             services.AddOptions();
-            services.AddTransient<PreviewsCopyMapper>();
+            services.AddTransient<PreviewsItemMapper>();
 
             var filePath = args[0];            
             if (!File.Exists(filePath))
@@ -52,12 +52,12 @@ namespace SouthSideComics.PreviewsCopyProcessor
 
                 // write each record to the database
                 var serviceProvider = services.BuildServiceProvider();                                                
-                var copyMapper = serviceProvider.GetService<PreviewsCopyMapper>();
+                var copyMapper = serviceProvider.GetService<PreviewsItemMapper>();
 
                 foreach (var copy in copyData)
                 {    
                     Console.WriteLine(string.Format("{0} - {1}", copy.DiamondNumber, copy.Title));                                    
-                    await copyMapper.SaveAsync(copy);                    
+                    await copyMapper.SaveCopyAsync(copy);                    
                 }
             }
 

@@ -22,18 +22,40 @@ namespace SouthSideComics.Core.Mongo
             return item;
         }
 
-        public async Task<PagedList<PreviewsItem>> FindAllAsync()
+        public async Task<PreviewsItem> SaveCopyAsync(PreviewsCopy copy)
         {
-            var colelction = GetCollection<PreviewsItem>("PreviewsItem");
+            var collection = GetCollection<PreviewsItem>("PreviewsItem");
+            var filter = Builders<PreviewsItem>.Filter.Eq("DiamondNumber", copy.DiamondNumber);
+            var update = Builders<PreviewsItem>.Update.Set("Copy", copy);
+
+            var options = new FindOneAndUpdateOptions<PreviewsItem, PreviewsItem>
+            {
+                ReturnDocument = ReturnDocument.After
+            };
+
+            var result = await collection.FindOneAndUpdateAsync(filter, update, options);
+
+            return result;
+        }
+
+        public async Task<PagedList<PreviewsItem>> Find(int page, int pagesize)
+        {
+            var collection = GetCollection<PreviewsItem>("PreviewsItem");
 
             // Find all by applying blank filter
-            var filter = new BsonDocument();                        
-            var results = await colelction
+            var filter = new BsonDocument();
+            var results = await collection
                 .Find(filter)
                 .SortBy(p => p.DiamondNumber)
+                .Skip((page - 1) * pagesize)
+                .Limit(pagesize)
                 .ToListAsync();
 
-            return new PagedList<PreviewsItem>(results);
-        }
+            var count = await collection
+                .Find(filter)
+                .CountAsync();
+
+            return new PagedList<PreviewsItem>(results, page, pagesize, (int)count);
+        }        
     }
 }

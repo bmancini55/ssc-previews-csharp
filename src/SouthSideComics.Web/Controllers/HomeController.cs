@@ -23,9 +23,7 @@ namespace SouthSideComicsWeb.Web.Controllers
         public async Task<IActionResult> Index(int page = 1, int pagesize = 24)
         {
             var start = (page - 1) * pagesize;
-            var items = await MongoItemMapper.FindAllAsync();
-
-            items = new PagedList<PreviewsItem>(items.Skip(start).Take(pagesize), page, pagesize, items.TotalCount);
+            var items = await MongoItemMapper.Find(page, pagesize);            
             var model = new PreviewsViewModel()
             {
                 Items = items
