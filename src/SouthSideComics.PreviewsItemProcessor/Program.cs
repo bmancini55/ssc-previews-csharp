@@ -104,7 +104,7 @@ namespace SouthSideComics.PreviewsItemProcessor
                         FOCDate = csvItem.FOC_DATE
                     };
 
-                    await itemMapper.SaveAsync(item);                    
+                    await itemMapper.InsertAsync(item);                    
                 }
             }
 

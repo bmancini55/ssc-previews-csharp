@@ -13,17 +13,17 @@ namespace SouthSideComicsWeb.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController(PreviewsItemMapper mongoItemMapper)
+        public HomeController(PreviewsItemMapper previewItemMapper)
         {            
-            MongoItemMapper = mongoItemMapper;
+            PreviewsItemMapper = previewItemMapper;
         }
 
-        public PreviewsItemMapper MongoItemMapper { get; set; }        
+        public PreviewsItemMapper PreviewsItemMapper { get; set; }        
 
         public async Task<IActionResult> Index(int page = 1, int pagesize = 24)
         {
             var start = (page - 1) * pagesize;
-            var items = await MongoItemMapper.Find(page, pagesize);            
+            var items = await PreviewsItemMapper.FindAllAsync(page, pagesize, p => p.DiamondNumber);
             var model = new PreviewsViewModel()
             {
                 Items = items

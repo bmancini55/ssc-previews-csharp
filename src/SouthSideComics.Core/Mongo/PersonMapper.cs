@@ -1,0 +1,24 @@
+﻿using System.Threading.Tasks;
+using Microsoft.Framework.OptionsModel;
+using SouthSideComics.Core.Common;
+using SouthSideComics.Core.Models;
+using MongoDB.Driver;
+using MongoDB.Bson;
+using System;
+
+namespace SouthSideComics.Core.Mongo
+{
+    public class PersonMapper : MongoMapper<Person>
+    {
+        public PersonMapper(IOptions<Config> config) 
+            : base(config, "person")
+        { }
+
+        public Task<Person> FindByFullNameAsync(string writer)
+        {
+            return GetCollection()
+                .Find(p => p.FullName == writer)
+                .FirstOrDefaultAsync();
+        }
+    }
+}

@@ -22,6 +22,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SouthSideComics.PreviewsIte
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SouthSideComics.PreviewsCopyProcessor", "src\SouthSideComics.PreviewsCopyProcessor\SouthSideComics.PreviewsCopyProcessor.xproj", "{6381683F-DA4B-44B9-8E65-EFA58ABF8401}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SouthSideComics.ItemImporter", "src\SouthSideComics.ItemImporter\SouthSideComics.ItemImporter.xproj", "{4392BB58-88A4-423E-898D-30DEB2838580}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{6381683F-DA4B-44B9-8E65-EFA58ABF8401}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6381683F-DA4B-44B9-8E65-EFA58ABF8401}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6381683F-DA4B-44B9-8E65-EFA58ABF8401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4392BB58-88A4-423E-898D-30DEB2838580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4392BB58-88A4-423E-898D-30DEB2838580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4392BB58-88A4-423E-898D-30DEB2838580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4392BB58-88A4-423E-898D-30DEB2838580}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,5 +69,6 @@ Global
 		{05FB5109-44BD-4098-8557-45B51FD78370} = {F262D95B-CCC3-455E-BF51-E2E35DE485CD}
 		{224060A9-E295-4BE1-9DDC-6E00C2BBCB1B} = {F262D95B-CCC3-455E-BF51-E2E35DE485CD}
 		{6381683F-DA4B-44B9-8E65-EFA58ABF8401} = {F262D95B-CCC3-455E-BF51-E2E35DE485CD}
+		{4392BB58-88A4-423E-898D-30DEB2838580} = {F262D95B-CCC3-455E-BF51-E2E35DE485CD}
 	EndGlobalSection
 EndGlobal

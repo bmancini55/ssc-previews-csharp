@@ -48,7 +48,7 @@ namespace SouthSideComics.DiamondImageFetcher
             }
             else
             {
-                var items = await itemMapper.FindAllAsync();
+                var items = await itemMapper.FindAllAsync(1, int.MaxValue);
                 StockNumbers = items.Select(p => p.StockNumber).ToList();
             }
             
