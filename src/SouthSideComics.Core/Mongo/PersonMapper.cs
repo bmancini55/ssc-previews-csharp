@@ -20,5 +20,28 @@ namespace SouthSideComics.Core.Mongo
                 .Find(p => p.FullName == writer)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<PagedList<Person>> FindWritersAsync()
+        {
+            return new PagedList<Person>(await GetCollection()
+                .Find(p => p.Writer)
+                .ToListAsync());            
+        }
+
+        public async Task<PagedList<Person>> FindArtistsAsync()
+        {
+            return new PagedList<Person>(await GetCollection()
+                .Find(p => p.Artist)
+                .ToListAsync());
+        }
+
+        public async Task<PagedList<Person>> FindCoverArtistAsync()
+        {
+            return new PagedList<Person>(await GetCollection()
+                .Find(p => p.CoverArtist)
+                .ToListAsync());
+        }
+
+        
     }
 }

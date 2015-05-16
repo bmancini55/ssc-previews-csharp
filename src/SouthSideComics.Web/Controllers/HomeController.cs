@@ -13,20 +13,32 @@ namespace SouthSideComicsWeb.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController(PreviewsItemMapper previewItemMapper)
-        {            
-            PreviewsItemMapper = previewItemMapper;
+        public HomeController(ItemMapper itemMapper, PublisherMapper publisherMapper, PersonMapper personMapper)
+        {
+            ItemMapper = itemMapper;
+            PersonMapper = personMapper;
+            PublisherMapper = publisherMapper;
         }
 
-        public PreviewsItemMapper PreviewsItemMapper { get; set; }        
+        public ItemMapper ItemMapper { get; set; }
+        public PublisherMapper PublisherMapper { get; set; }
+        public PersonMapper PersonMapper { get; set; }
 
-        public async Task<IActionResult> Index(int page = 1, int pagesize = 24)
+        public async Task<IActionResult> Index(int page = 1, int pagesize = 24, string publisher = null, string writer = null, string artist = null)
         {
-            var start = (page - 1) * pagesize;
-            var items = await PreviewsItemMapper.FindAllAsync(page, pagesize, p => p.DiamondNumber);
-            var model = new PreviewsViewModel()
+            var publishers = await PublisherMapper.FindAllAsync(p => p.Name);
+            var writers = await PersonMapper.FindWritersAsync();
+            var artists = await PersonMapper.FindArtistsAsync();
+            var items = await ItemMapper.FindAsync(page, pagesize, "MAY15", publisher, writer, artist, p => p.Previews[0].PreviewNumber);
+            var model = new HomeListModel()
             {
-                Items = items
+                Items = items,
+                Publishers = publishers,
+                Writers = writers,
+                Artists = artists,
+                Publisher = publisher,
+                Writer = writer,
+                Artist = artist
             };
 
             return View(model);
