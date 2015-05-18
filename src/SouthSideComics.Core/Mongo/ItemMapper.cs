@@ -26,13 +26,13 @@ namespace SouthSideComics.Core.Mongo
                 filters.Add(builder.Regex("Previews.PreviewNumber", new BsonRegularExpression("^" + preview)));
 
             if (!string.IsNullOrEmpty(publisherId))
-                filters.Add(builder.Eq(p => p.Publisher.Id, new ObjectId(publisherId)));
+                filters.Add(builder.Eq(p => p.Publisher.Id, publisherId));
 
             if (!string.IsNullOrEmpty(writerId))
-                filters.Add(builder.Eq(p => p.Writer.Id, new ObjectId(writerId)));
+                filters.Add(builder.Eq(p => p.Writer.Id, writerId));
 
             if (!string.IsNullOrEmpty(artistId))
-                filters.Add(builder.Eq(p => p.Artist.Id, new ObjectId(artistId)));
+                filters.Add(builder.Eq(p => p.Artist.Id, artistId));
 
             if (filters.Count > 0)
                 filter = builder.And(filters);

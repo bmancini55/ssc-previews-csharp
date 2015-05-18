@@ -3,9 +3,9 @@ using Microsoft.Framework.DependencyInjection;
 using SouthSideComics.Core.Common;
 using SouthSideComics.Core.Models;
 using SouthSideComics.Core.Mongo;
+using SouthSideComics.Core.Elasticsearch;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SouthSideComics.ItemImporter
@@ -22,17 +22,18 @@ namespace SouthSideComics.ItemImporter
             services.AddOptions();
             services.AddTransient<CategoryMapper>();
             services.AddTransient<GenreMapper>();
-            services.AddTransient<ItemMapper>();
+            services.AddTransient<Core.Mongo.ItemMapper>();
             services.AddTransient<PersonMapper>();            
             services.AddTransient<PreviewsItemMapper>();
             services.AddTransient<PublisherMapper>();
             services.AddTransient<ItemImportFactory>();
             services.AddTransient<SeriesMapper>();
+            services.AddTransient<Core.Elasticsearch.ItemMapper>();
             
             IServiceProvider provider = services.BuildServiceProvider();
 
             var importService = ActivatorUtilities.CreateInstance<ItemImportService>(provider);
-            Task.WaitAll(importService.Process("MAY15"));
+            Task.WaitAll(importService.Process("MAY15"));            
 
             Console.ReadKey();
         }
@@ -41,7 +42,7 @@ namespace SouthSideComics.ItemImporter
     public class ItemImportService
     {
         public ItemImportService(ItemImportFactory itemImportFactory, PreviewsItemMapper previewsItemMapper, CategoryMapper categoryMapper, 
-            PublisherMapper publisherMapper, PersonMapper personMapper, SeriesMapper seriesMapper, GenreMapper genreMapper, ItemMapper itemMapper)
+            PublisherMapper publisherMapper, PersonMapper personMapper, SeriesMapper seriesMapper, GenreMapper genreMapper, Core.Mongo.ItemMapper itemMapper, Core.Elasticsearch.ItemMapper esItemMapper)
         {
             this.factory = itemImportFactory;
             this.previewsItemMapper = previewsItemMapper;
@@ -51,6 +52,7 @@ namespace SouthSideComics.ItemImporter
             this.seriesMapper = seriesMapper;
             this.genreMapper = genreMapper;
             this.itemMapper = itemMapper;
+            this.esItemMapper = esItemMapper;
         }
 
         ItemImportFactory factory;
@@ -60,7 +62,8 @@ namespace SouthSideComics.ItemImporter
         PersonMapper personMapper;
         SeriesMapper seriesMapper;
         GenreMapper genreMapper;
-        ItemMapper itemMapper;
+        Core.Mongo.ItemMapper itemMapper;
+        Core.Elasticsearch.ItemMapper esItemMapper;
         
         public async Task Process(string preview)
         {
@@ -120,8 +123,10 @@ namespace SouthSideComics.ItemImporter
                 }
 
                 // item
-                var item = factory.CreateItem(previewsitem, category, genre, series, publisher, writer, artist, coverartist);
+                var item = factory.CreateItem(previewsitem, category, genre, series, publisher, writer, artist, coverartist);                
                 item = await itemMapper.InsertAsync(item);
+                await esItemMapper.SaveAsync(item);
+                Console.WriteLine("Wrote: " + item.Title);
             }
         }                       
     }

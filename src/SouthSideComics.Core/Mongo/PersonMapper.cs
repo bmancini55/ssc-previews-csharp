@@ -25,6 +25,7 @@ namespace SouthSideComics.Core.Mongo
         {
             return new PagedList<Person>(await GetCollection()
                 .Find(p => p.Writer)
+                .SortBy(p => p.FullName)
                 .ToListAsync());            
         }
 
@@ -32,6 +33,7 @@ namespace SouthSideComics.Core.Mongo
         {
             return new PagedList<Person>(await GetCollection()
                 .Find(p => p.Artist)
+                .SortBy(p => p.FullName)
                 .ToListAsync());
         }
 
@@ -39,6 +41,7 @@ namespace SouthSideComics.Core.Mongo
         {
             return new PagedList<Person>(await GetCollection()
                 .Find(p => p.CoverArtist)
+                .SortBy(p => p.FullName)
                 .ToListAsync());
         }
 

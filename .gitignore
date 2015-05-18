@@ -201,3 +201,5 @@ FakesAssemblies/
 **/wwwroot/img/
 src/SouthSideComics.Web/wwwroot/lib
 src/SouthSideComics.Web/wwwroot/img
+
+**/*.lock.json

@@ -10,7 +10,8 @@
         "MySql.Data": "6.9.6",
         "System.Data.Common": "4.0.0-beta-22816",
         "Microsoft.Framework.OptionsModel": "1.0.0-beta4",
-        "MongoDB.Driver": "2.0.0"
+        "MongoDB.Driver": "2.0.0",
+        "NEST": "1.5.0"
     },
 
     "frameworks": {

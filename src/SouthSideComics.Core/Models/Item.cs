@@ -1,14 +1,14 @@
 ﻿using MongoDB.Bson;
-using System;
+using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SouthSideComics.Core.Models
 {
     public class Item
     {
-        public ObjectId Id { get; set; }        
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }        
         public string StockNumber { get; set; }
         public string ParentItem { get; set; }        
         public string Title { get; set; }
@@ -46,15 +46,18 @@ namespace SouthSideComics.Core.Models
         public PersonLink CoverArtist { get; set; }
         public string AllianceSKU { get; set; }
         public string FOCDate { get; set; }
-
+        
         public List<PreviewsItemLink> Previews { get; set; }
 
         public class PreviewsItemLink
         {
             public PreviewsItemLink(PreviewsItem previewsItem)
             {
-                PreviewNumber = previewsItem.DiamondNumber;
-                Page = previewsItem.Page;
+                if (previewsItem != null)
+                {
+                    PreviewNumber = previewsItem.DiamondNumber;
+                    Page = previewsItem.Page;
+                }
             }
 
             public string PreviewNumber { get; set; }            
@@ -65,11 +68,16 @@ namespace SouthSideComics.Core.Models
         {
             public PersonLink(Person person)
             {
-                Id = person.Id;
-                FullName = person.FullName;
+                if (person != null)
+                {
+                    Id = person.Id;
+                    FullName = person.FullName;
+                }
             }
 
-            public ObjectId Id { get; set; }
+            [BsonId]
+            [BsonRepresentation(BsonType.ObjectId)]
+            public string Id { get; set; }
             public string FullName { get; set; }
         }
     }

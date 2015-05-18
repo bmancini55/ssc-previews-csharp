@@ -33,7 +33,8 @@ namespace SouthSideComicsWeb
                 .AddMvc()            
                 .AddTransient<ItemMapper>()
                 .AddTransient<PersonMapper>()
-                .AddTransient<PublisherMapper>();
+                .AddTransient<PublisherMapper>()
+                .AddTransient<SouthSideComics.Core.Elasticsearch.ItemMapper>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

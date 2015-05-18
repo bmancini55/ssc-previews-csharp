@@ -1,10 +1,13 @@
 ﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace SouthSideComics.Core.Models
 {
     public class PreviewsItem
-    {        
-        public ObjectId Id { get; set; }
+    {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
         public string DiamondNumber { get; set; }
         public string StockNumber { get; set; }
         public string ParentItem { get; set; }
