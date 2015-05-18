@@ -22,7 +22,7 @@ namespace SouthSideComics.Core.Elasticsearch
                 );
         }
 
-        public async Task<IEnumerable<Item>> FindAsync(int page, int pagesize, string preview, string publisher, string writer, string artist, string text)
+        public async Task<PagedList<Item>> FindAsync(int page, int pagesize, string preview, string publisher, string writer, string artist, string text)
         {
             var results = await GetClient()
                 .SearchAsync<Item>(s => s
@@ -43,18 +43,18 @@ namespace SouthSideComics.Core.Elasticsearch
                             .Query(query => query
                                 .Bool(boolFilter => boolFilter
                                     .Should(
-                                        sq => sq.Match(m => m.Query(text).OnField(item => item.Title)),
-                                        sq => sq.Match(m => m.Query(text).OnField(item => item.Publisher.Name)),
-                                        sq => sq.Match(m => m.Query(text).OnField(item => item.Writer.FullName)),
-                                        sq => sq.Match(m => m.Query(text).OnField(item => item.Artist.FullName))
+                                        sq => sq.MatchPhrase(m => m.Query(text).OnField(item => item.Title)),
+                                        sq => sq.MatchPhrase(m => m.Query(text).OnField(item => item.Publisher.Name)),
+                                        sq => sq.MatchPhrase(m => m.Query(text).OnField(item => item.Writer.FullName)),
+                                        sq => sq.MatchPhrase(m => m.Query(text).OnField(item => item.Artist.FullName))
                                     )
                                 )
                             )
                         )
                     )
                     .SortAscending(sort => sort.Previews[0].PreviewNumber)
-                );            
-            return results.Documents;
+                );
+            return new PagedList<Item>(results.Documents, page, pagesize, (int)results.HitsMetaData.Total);            
         }
     }
 }

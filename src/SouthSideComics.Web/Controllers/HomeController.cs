@@ -24,13 +24,13 @@ namespace SouthSideComicsWeb.Web.Controllers
         public PersonMapper PersonMapper { get; set; }
         public SouthSideComics.Core.Elasticsearch.ItemMapper ESItemMapper { get; set; }
 
-        public async Task<IActionResult> Index(int page = 1, int pagesize = 24, string publisher = null, string writer = null, string artist = null)
+        public async Task<IActionResult> Index(int page = 1, int pagesize = 24, string publisher = null, string writer = null, string artist = null, string query = null)
         {
             var publishers = await PublisherMapper.FindAllAsync(p => p.Name);
             var writers = await PersonMapper.FindWritersAsync();
             var artists = await PersonMapper.FindArtistsAsync();
             //var items = await ItemMapper.FindAsync(page, pagesize, "MAY15", publisher, writer, artist, p => p.Previews[0].PreviewNumber);
-            var items = new PagedList<Item>(await ESItemMapper.FindAsync(page, pagesize, "MAY15", publisher, writer, artist, null));
+            var items = await ESItemMapper.FindAsync(page, pagesize, "MAY15", publisher, writer, artist, query);
 
             var model = new HomeListModel()
             {

@@ -18,6 +18,7 @@ namespace SouthSideComics.Web.Models
         public string Publisher { get; set; }
         public string Writer { get; set; }
         public string Artist { get; set; }
+        public string Query { get; set; }
         
         public IEnumerable<SelectListItem> PublisherList
         {
