@@ -29,8 +29,9 @@ namespace SouthSideComicsWeb.Web.Controllers
             var publishers = await PublisherMapper.FindAllAsync(p => p.Name);
             var writers = await PersonMapper.FindWritersAsync();
             var artists = await PersonMapper.FindArtistsAsync();
-            //var items = await ItemMapper.FindAsync(page, pagesize, "MAY15", publisher, writer, artist, p => p.Previews[0].PreviewNumber);
+            
             var items = await ESItemMapper.FindAsync(page, pagesize, "MAY15", publisher, writer, artist, query);
+            items = await ItemMapper.FindAsync(items);
 
             var model = new HomeListModel()
             {

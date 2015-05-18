@@ -5,6 +5,7 @@ using SouthSideComics.Core.Common;
 using SouthSideComics.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -51,6 +52,27 @@ namespace SouthSideComics.Core.Mongo
                 .CountAsync();
 
             return new PagedList<Item>(items, page, pagesize, (int)count);
+        }
+
+        /// <summary>
+        /// Join to Mongo for full result set
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public async Task<PagedList<Item>> FindAsync(PagedList<Item> items)
+        {
+            var page = items.PageNumber;
+            var pagesize = items.PageSize;
+            var total = items.TotalCount;
+            var ids = items.Select(p => p.Id);
+            var results = await GetCollection()
+                .Find(Builders<Item>.Filter
+                    .In(p => p.Id, ids)
+                )
+                .SortBy(p => p.Previews[0].PreviewNumber)
+                .ToListAsync();
+
+            return new PagedList<Item>(results, page, pagesize, total);
         }
     }
 }
