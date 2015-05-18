@@ -7,26 +7,27 @@ using System.Threading.Tasks;
 
 namespace SouthSideComics.Core.Elasticsearch
 {
-    public class ItemMapper : ElasticsearchMapper
+    public class SearchItemMapper : ElasticsearchMapper
     {
-        public ItemMapper(IOptions<Config> config)
+        public SearchItemMapper(IOptions<Config> config)
             : base(config)
         { }
 
-        public async Task SaveAsync(Item instance)
+        public async Task SaveAsync(SearchItem instance)
         {
             var result = await GetClient()
                 .IndexAsync(instance, i => i
-                    .Index("ssc-item")
+                    .Index("items")
                     .Type("item")
                 );
         }
 
-        public async Task<PagedList<Item>> FindAsync(int page, int pagesize, string preview, string publisher, string writer, string artist, string text)
+        public async Task<PagedList<SearchItem>> FindAsync(int page, int pagesize, string preview, string publisher, string writer, string artist, string text)
         {
             var results = await GetClient()
-                .SearchAsync<Item>(s => s
-                    .Index("ssc-item")
+                .SearchAsync<SearchItem>(s => s
+                    .Index("items")
+                    .Type("item")
                     .From((page - 1) * pagesize)
                     .Size(pagesize)
                     .Query(mainQuery => mainQuery
@@ -54,7 +55,7 @@ namespace SouthSideComics.Core.Elasticsearch
                     )
                     .SortAscending(sort => sort.Previews[0].PreviewNumber)
                 );
-            return new PagedList<Item>(results.Documents, page, pagesize, (int)results.HitsMetaData.Total);            
+            return new PagedList<SearchItem>(results.Documents, page, pagesize, (int)results.HitsMetaData.Total);            
         }
     }
 }

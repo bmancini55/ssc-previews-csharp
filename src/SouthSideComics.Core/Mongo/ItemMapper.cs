@@ -53,18 +53,14 @@ namespace SouthSideComics.Core.Mongo
 
             return new PagedList<Item>(items, page, pagesize, (int)count);
         }
-
-        /// <summary>
-        /// Join to Mongo for full result set
-        /// </summary>
-        /// <param name="items"></param>
-        /// <returns></returns>
-        public async Task<PagedList<Item>> FindAsync(PagedList<Item> items)
+        
+        public async Task<PagedList<Item>> FindAsync(PagedList<SearchItem> items)
         {
+            var ids = items.Select(p => p.Id);
             var page = items.PageNumber;
             var pagesize = items.PageSize;
             var total = items.TotalCount;
-            var ids = items.Select(p => p.Id);
+            
             var results = await GetCollection()
                 .Find(Builders<Item>.Filter
                     .In(p => p.Id, ids)

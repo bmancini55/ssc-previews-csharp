@@ -28,7 +28,7 @@ namespace SouthSideComics.ItemImporter
             services.AddTransient<PublisherMapper>();
             services.AddTransient<ItemImportFactory>();
             services.AddTransient<SeriesMapper>();
-            services.AddTransient<Core.Elasticsearch.ItemMapper>();
+            services.AddTransient<Core.Elasticsearch.SearchItemMapper>();
             
             IServiceProvider provider = services.BuildServiceProvider();
 
@@ -42,7 +42,8 @@ namespace SouthSideComics.ItemImporter
     public class ItemImportService
     {
         public ItemImportService(ItemImportFactory itemImportFactory, PreviewsItemMapper previewsItemMapper, CategoryMapper categoryMapper, 
-            PublisherMapper publisherMapper, PersonMapper personMapper, SeriesMapper seriesMapper, GenreMapper genreMapper, Core.Mongo.ItemMapper itemMapper, Core.Elasticsearch.ItemMapper esItemMapper)
+            PublisherMapper publisherMapper, PersonMapper personMapper, SeriesMapper seriesMapper, GenreMapper genreMapper, Core.Mongo.ItemMapper itemMapper, 
+            Core.Elasticsearch.SearchItemMapper esItemMapper)
         {
             this.factory = itemImportFactory;
             this.previewsItemMapper = previewsItemMapper;
@@ -63,7 +64,7 @@ namespace SouthSideComics.ItemImporter
         SeriesMapper seriesMapper;
         GenreMapper genreMapper;
         Core.Mongo.ItemMapper itemMapper;
-        Core.Elasticsearch.ItemMapper esItemMapper;
+        Core.Elasticsearch.SearchItemMapper esItemMapper;
         
         public async Task Process(string preview)
         {
@@ -125,7 +126,11 @@ namespace SouthSideComics.ItemImporter
                 // item
                 var item = factory.CreateItem(previewsitem, category, genre, series, publisher, writer, artist, coverartist);                
                 item = await itemMapper.InsertAsync(item);
-                await esItemMapper.SaveAsync(item);
+
+                // search item
+                var searchitem = new SearchItem(item);
+                await esItemMapper.SaveAsync(searchitem);
+
                 Console.WriteLine("Wrote: " + item.Title);
             }
         }                       
